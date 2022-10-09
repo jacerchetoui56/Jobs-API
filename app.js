@@ -2,6 +2,8 @@ require('dotenv').config();
 require('express-async-errors');
 const express = require('express');
 const app = express();
+const cors = require('cors')
+app.use(cors())
 //?this is for hosting : to avoid hosting problem , more on =>  https://www.npmjs.com/package/express-rate-limit
 app.set('trust proxy', 1)
 //db
@@ -13,7 +15,6 @@ const errorHandlerMiddleware = require('./middleware/error-handler');
 
 app.use(express.json());
 // extra packages
-const cors = require('cors')
 const xssClean = require('xss-clean')
 const helmet = require('helmet')
 const rateLimiter = require('express-rate-limit')
@@ -36,7 +37,6 @@ app.use(rateLimiter({
   max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
 }))
-app.use(cors())
 app.use(helmet())
 app.use(xssClean())
 
