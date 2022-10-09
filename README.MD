@@ -1,3 +1,3 @@
 ## Jobs API
 
-### link to the API: [https://jobs-api-jacer.herokuapp.com/](Jobs API)
+### link to the API: [Jobs API](https://jobs-api-jacer.herokuapp.com/)
