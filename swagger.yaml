@@ -1,0 +1,257 @@
+openapi: 3.0.0
+info:
+  title: Jobs
+  contact:
+    name: Jacer Chetoui
+    url: https://jacerchetoui.me
+    email: jacerdjo@gmail.com
+  version: "1.0"
+servers:
+  - url: https://jobs-api-jacer.herokuapp.com/api/v1
+    variables: {}
+paths:
+  /jobs:
+    get:
+      tags:
+        - Jobs
+      summary: get all jobs
+      operationId: getalljobs
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+      servers:
+        - url: https://jobs-api-jacer.herokuapp.com/api/v1
+          variables: {}
+    post:
+      tags:
+        - Jobs
+      summary: create job
+      operationId: createjob
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/createjobrequest"
+                - example:
+                    position: front
+                    company: net
+            example:
+              position: front
+              company: net
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+      servers:
+        - url: https://jobs-api-jacer.herokuapp.com/api/v1
+          variables: {}
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: get one job
+    get:
+      tags:
+        - Jobs
+      summary: Get one job
+      operationId: Getonejob
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+      servers:
+        - url: https://jobs-api-jacer.herokuapp.com/api/v1
+          variables: {}
+
+    patch:
+      tags:
+        - Jobs
+      summary: update job
+      operationId: updatejob
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/updatejobrequest"
+                - example:
+                    status: declined
+            example:
+              status: declined
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+      servers:
+        - url: https://jobs-api-jacer.herokuapp.com/api/v1
+          variables: {}
+    delete:
+      tags:
+        - Jobs
+      summary: Delete job
+      operationId: Deletejob
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+      servers:
+        - url: https://jobs-api-jacer.herokuapp.com/api/v1
+          variables: {}
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: login
+      operationId: login
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/loginrequest"
+                - example:
+                    email: jacer@gmail.com
+                    password: password
+            example:
+              email: jacer@gmail.com
+              password: password
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      servers:
+        - url: https://jobs-api-jacer.herokuapp.com/api/v1
+          variables: {}
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: register
+      operationId: register
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/registerrequest"
+                - example:
+                    name: wallouda
+                    email: wallouda@gmail.com
+                    password: password
+            example:
+              name: wallouda
+              email: wallouda@gmail.com
+              password: password
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+      servers:
+        - url: https://jobs-api-jacer.herokuapp.com/api/v1
+          variables: {}
+components:
+  schemas:
+    loginrequest:
+      title: loginrequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: jacer@gmail.com
+        password: password
+    registerrequest:
+      title: registerrequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: wallouda
+        email: wallouda@gmail.com
+        password: password
+    createjobrequest:
+      title: createjobrequest
+      required:
+        - position
+        - company
+      type: object
+      properties:
+        position:
+          type: string
+        company:
+          type: string
+      example:
+        position: front
+        company: net
+    updatejobrequest:
+      title: updatejobrequest
+      required:
+        - status
+      type: object
+      properties:
+        status:
+          type: string
+      example:
+        status: declined
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Auth
+    description: ""
+  - name: Jobs
+    description: ""

@@ -1,5 +1,11 @@
 require('dotenv').config();
 require('express-async-errors');
+
+//*swagger setup
+const swagger = require('swagger-ui-express')
+const YAML = require('yamljs')
+const swaggerDocument = YAML.load('./swagger.yaml')
+
 const express = require('express');
 const app = express();
 const cors = require('cors')
@@ -25,8 +31,10 @@ const authRouter = require('./routes/auth')
 app.use('/api/v1/jobs', jobsRouter)
 app.use('/api/v1/auth', authRouter)
 
+app.use('/api-docs', swagger.serve, swagger.setup(swaggerDocument))
+
 app.get('/', (req, res) => {
-  res.send('Welcome to my app')
+  res.send('<h1>Jobs API</h1><a href="/api-docs" >API documentation</a>')
 })
 
 app.use(errorHandlerMiddleware);
