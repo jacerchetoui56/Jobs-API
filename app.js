@@ -24,6 +24,9 @@ const authRouter = require('./routes/auth')
 app.use('/api/v1/jobs', jobsRouter)
 app.use('/api/v1/auth', authRouter)
 
+app.get('/', (req, res) => {
+  res.send('Welcome to my app')
+})
 
 app.use(errorHandlerMiddleware);
 app.use(notFoundMiddleware);
